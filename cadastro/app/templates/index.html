@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="col-8 m-alto pt-2 pb-2 text-center">
+    <h1>Crud com python3</h1>
+</div>
+<link rel="stylesheet" href="{% static '/css/base.css/' %}" rel="stylesheet">
+
+
+<div class="col-8 m-alto pt-2 pb-2 text-center">
+    <a href="/form/" class="btn btn-success">Adcionar</a>
+</div>
+
+<div class="col-8 m-alto pt-2 pb-2 text-center">
+  <form method="get">
+    <input type="text" id="search" name="search" class="form-control" placeholder="Buscar...">
+  </form>
+</div>
+
+<div class="col-8 m-alto pt-2 pb-2 text-center"></div>
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Carro</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Ano</th>
+      <th scope="col">ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for dbs in db %}
+    <tr>
+      <th>{{dbs.id}}</th>
+      <td>{{dbs.carro}}</td>
+      <td>{{dbs.marca}}</td>
+      <td>{{dbs.ano}}</td>
+      <td>
+        <a href="/view/{{dbs.id}}/" class="btn btn-dark">Visualizar</a>
+        <a href="/edit/{{dbs.id}}/" class="btn btn-primary">Editar</a>
+        <a href="/delete/{{dbs.id}}/" class="btn btn-danger btnDel">Deletar</a>
+      </td>
+    </tr>
+    {% endfor %}
+
+  </tbody>
+
+</table>
+
+<diiv class="pagination">
+
+  {% if db.has_previous %}
+    <a href="?page={{db.previous_page_number}}"> < </a>
+  {% endif %}
+  
+  {{db.number}}
+
+  {% if db.has_next %}
+    <a href="?page={{db.next_page_number}}"> > </a>
+  {% endif %}
+
+</div>
+
+{% endblock  %}
+
+
